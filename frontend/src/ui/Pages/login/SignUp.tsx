@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Container, Modal} from "react-bootstrap";
-import {SignUpForm} from "../../../shared/components/main-nav/sing-up/SignUpForm.tsx";
+import {SignUpForm} from "../../../shared/components/main-nav/sign-up/SignUpForm.tsx";
 
 
 export function SignUp() {

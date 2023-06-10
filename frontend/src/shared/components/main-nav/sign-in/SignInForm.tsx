@@ -33,16 +33,16 @@ export const SignInForm = () => {
         const{resetForm, setStatus} = formikHelpers
         const result = await submitRequest(values)
         const {data: response, error} = result as {data: ClientResponseForSignIn, error: ClientResponseForSignIn}
-        if(error){
+        if(error) {
             setStatus({type: error.type, message: error.message})
-        }else if (response?.status === 200){
+        } else if (response?.status === 200) {
             window.localStorage.removeItem("authorization");
             window.localStorage.setItem("authorization", response.authorization as string);
             const decodedToken = jwtDecode<JwtToken>(response.authorization as string)
             dispatch(getAuth(decodedToken))
-            // resetForm()
+            resetForm()
             setStatus({type: response.type, message: response.message})
-        }else{
+        } else {
             setStatus({type: response?.type, message: response?.message})
         }
 
@@ -54,7 +54,6 @@ export const SignInForm = () => {
             initialValues={signIn}
             onSubmit={submitSignIn}
             validationSchema={validator}>
-
             {SignInFormContent}
         </Formik>
         </>
@@ -98,7 +97,7 @@ function SignInFormContent(props: FormikProps<SignIn>) {
                 </Form.Group>
                 <FontAwesomeIcon icon="key" />
                 {/*controlId must match what is defined by the initialValues object*/}
-                <Form.Group className="mb-1" controlId="profileAtHandle">
+                <Form.Group className="mb-1" controlId="profileHandle">
                     <Form.Label>password</Form.Label>
                         <InputGroup>
                             <InputGroup.Text>
